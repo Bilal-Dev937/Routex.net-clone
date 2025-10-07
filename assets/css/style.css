@@ -42,6 +42,14 @@ img {
     --font-size-large: 50px;
     --font-size-xl: 80px;
 
+    @media (max-width: 1400px) {
+        --font-size-xxl: 65px;
+    }
+
+    @media (max-width: 1200px) {
+        --font-size-xxl: 58px;
+    }
+
     @media (max-width: 991px) {
         --font-size-md: 20px;
         --font-size-lg: 26px;
@@ -161,6 +169,15 @@ header {
                     -o-transition: all 0.3s ease-in-out;
                     transition: all 0.3s ease-in-out;
                 }
+            }
+        }
+
+        .burger-menu {
+            display: none;
+
+            i {
+                color: var(--color-accent);
+                font-size: var(--font-size-medium);
             }
         }
     }
@@ -312,6 +329,10 @@ main {
                         position: relative;
                         overflow: hidden;
                         z-index: 99;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        white-space: nowrap;
 
                         &:hover {
                             border: 1px solid #034833;
@@ -372,6 +393,8 @@ main {
             .hero-right {
                 display: flex;
                 align-items: flex-end;
+                height: 100%;
+                position: relative;
 
                 .circle {
                     .ball-shape {
@@ -430,6 +453,11 @@ main {
                 font-size: var(--font-size-medium);
                 font-weight: var(--font-weight-bold);
                 line-height: 30px;
+            }
+
+            p {
+                color: var(--color-text-muted);
+                font-size: var(--font-size-small);
             }
         }
     }
@@ -585,9 +613,11 @@ main {
 
     .read-btn {
         margin: 42px 0 0;
+        flex-wrap: wrap;
 
         .btn-transparent {
             transition: 0.3s;
+            white-space: nowrap;
 
             i {
                 padding: 0 0 0 10px;
@@ -669,9 +699,18 @@ main {
     padding: 114px 0;
 }
 
-.countries-swiper {
-    .swiper-slide {
-        margin: 0 30px 0 0;
+.countries-mobile-swiper {
+    .country-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        /* optional for consistent sizing */
+    }
+
+    .country-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
@@ -704,6 +743,7 @@ main {
 
         .swiper-btn {
             gap: 20px;
+            margin-bottom: 30px;
 
             .btn {
                 border-radius: 50px;
@@ -724,7 +764,7 @@ main {
     }
 }
 
-.our-countries .inner .card-container {
+.our-countries .inner .card-container .swiper-slide {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -830,6 +870,16 @@ main {
     transition: transform 0.6s ease-in-out 0.1s, opacity 0.6s ease-in-out 0.1s;
 }
 
+.our-countries .inner .card-container .countries-mobile-swiper {
+    .country-card {
+        border-radius: 20px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        /* optional for consistent sizing */
+    }
+}
+
 .visa-category {
     padding: 120px 0 120px;
 
@@ -860,83 +910,83 @@ main {
         }
     }
 
-    .row {
-        .card {
-            border-radius: 20px;
+    .rows-wrapper {
+        gap: 30px;
 
-            &:hover {
-                .card-img {
-                    img {
-                        transform: scale(1.3);
-                    }
-                }
-            }
+        .row {
+            .card {
+                border-radius: 20px;
 
-            .card-body {
-                .card-img {
-                    .image {
-                        width: 258px;
-                        height: 251px;
-                        border-radius: 20px;
-                        overflow: hidden;
-
+                &:hover {
+                    .card-img {
                         img {
-                            transition: 0.5s all ease;
-                            border-radius: 20px;
+                            transform: scale(1.3);
                         }
                     }
                 }
 
-                .card-details {
-                    h5 {
-                        font-size: var(--font-size-medium);
-                        font-weight: var(--font-weight-bold);
-                        line-height: var(--font-size-base);
-                        color: var(--color-brand);
-                        margin: 0 0 10px;
-                    }
-
-                    p {
-                        line-height: var(--font-size-base);
-                        color: var(--color-text-muted);
-                        margin: 0 0 30px;
-                    }
-
-                    .visa-item-content {
-                        a {
-                            padding: 17px;
+                .card-body {
+                    .card-img {
+                        .image {
+                            width: 258px;
+                            height: 251px;
                             border-radius: 20px;
-                            border: 1px solid var(--color-accent);
-                            transition: 0.3s;
+                            overflow: hidden;
 
-                            &:hover {
-                                background: var(--color-accent);
+                            img {
+                                transition: 0.5s all ease;
+                                border-radius: 20px;
+                            }
+                        }
+                    }
+
+                    .card-details {
+                        h5 {
+                            font-size: var(--font-size-medium);
+                            font-weight: var(--font-weight-bold);
+                            line-height: var(--font-size-base);
+                            color: var(--color-brand);
+                            margin: 0 0 10px;
+                        }
+
+                        p {
+                            line-height: var(--font-size-base);
+                            color: var(--color-text-muted);
+                            margin: 0 0 30px;
+                        }
+
+                        .visa-item-content {
+                            a {
+                                padding: 17px;
+                                border-radius: 20px;
+                                border: 1px solid var(--color-accent);
+                                transition: 0.3s;
+
+                                &:hover {
+                                    background: var(--color-accent);
+
+                                    i {
+                                        color: var(--color-bg);
+                                        transform: rotate(45deg);
+                                        transition: 0.3s;
+                                    }
+                                }
 
                                 i {
-                                    color: var(--color-bg);
-                                    transform: rotate(45deg);
-                                    transition: 0.3s;
+                                    color: var(--color-accent);
+                                    rotate: -45deg;
                                 }
                             }
 
-                            i {
-                                color: var(--color-accent);
-                                rotate: -45deg;
+                            .visa-small-image {
+                                height: 45px;
+                                width: 45px;
                             }
-                        }
-
-                        .visa-small-image {
-                            height: 45px;
-                            width: 45px;
                         }
                     }
                 }
             }
         }
-    }
-
-    .row-2 {
-        margin: 33px 0 0;
     }
 }
 
@@ -1581,95 +1631,99 @@ main {
     .blog-row {
         margin: 60px 0;
 
-        .blog-card {
-            .image-box {
-                transition: 0.5s all ease;
-                overflow: hidden;
-                border-radius: 20px 20px 0 0;
+        .blog-swiper {
+            .swiper-slide {}
 
-                &:hover {
-                    img {
-                        transform: scale(1.3);
+            .blog-card {
+                .image-box {
+                    transition: 0.5s all ease;
+                    overflow: hidden;
+                    border-radius: 20px 20px 0 0;
+
+                    &:hover {
+                        img {
+                            transform: scale(1.3);
+                        }
+                    }
+
+                }
+
+                img {
+                    transition: 0.5s all ease;
+                    border-radius: 20px 20px 0 0;
+                }
+            }
+
+            .detail {
+                padding: 20px 40px;
+                border: 1px solid #E3DBD8;
+                border-top: none;
+                border-radius: 0 0 20px 20px;
+
+                .text-meta {
+                    margin: 0 0 20px;
+
+                    .date {
+                        color: var(--color-text-muted);
+                        transition: 0.3s all ease-in-out;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--color-accent);
+                        }
+
+                        i {
+                            color: var(--color-text);
+                        }
+                    }
+
+                    .user {
+                        color: var(--color-text-muted);
+                        transition: 0.3s all ease-in-out;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--color-accent);
+                        }
+
+                        i {
+                            color: var(--color-text);
+                        }
                     }
                 }
 
-            }
-
-            img {
-                transition: 0.5s all ease;
-                border-radius: 20px 20px 0 0;
-            }
-        }
-
-        .detail {
-            padding: 20px 40px;
-            border: 1px solid #E3DBD8;
-            border-top: none;
-            border-radius: 0 0 20px 20px;
-
-            .text-meta {
-                margin: 0 0 20px;
-
-                .date {
-                    color: var(--color-text-muted);
+                h4 {
+                    font-size: var(--font-size-medium);
+                    line-height: var(--font-size-base);
+                    font-weight: var(--font-weight-bold);
+                    color: var(--color-brand);
                     transition: 0.3s all ease-in-out;
                     cursor: pointer;
 
                     &:hover {
                         color: var(--color-accent);
                     }
-
-                    i {
-                        color: var(--color-text);
-                    }
                 }
 
-                .user {
+                p {
                     color: var(--color-text-muted);
+                    line-height: var(--font-size-base);
+                }
+
+                a {
+                    font-size: var(--font-size-xsmall);
+                    line-height: var(--font-size-base);
+                    font-weight: var(--font-weight-semibold);
+                    color: var(--color-brand);
                     transition: 0.3s all ease-in-out;
-                    cursor: pointer;
 
                     &:hover {
                         color: var(--color-accent);
                     }
 
                     i {
-                        color: var(--color-text);
+                        margin: 0 0 0 10px;
                     }
-                }
-            }
-
-            h4 {
-                font-size: var(--font-size-medium);
-                line-height: var(--font-size-base);
-                font-weight: var(--font-weight-bold);
-                color: var(--color-brand);
-                transition: 0.3s all ease-in-out;
-                cursor: pointer;
-
-                &:hover {
-                    color: var(--color-accent);
-                }
-            }
-
-            p {
-                color: var(--color-text-muted);
-                line-height: var(--font-size-base);
-            }
-
-            a {
-                font-size: var(--font-size-xsmall);
-                line-height: var(--font-size-base);
-                font-weight: var(--font-weight-semibold);
-                color: var(--color-brand);
-                transition: 0.3s all ease-in-out;
-
-                &:hover {
-                    color: var(--color-accent);
-                }
-
-                i {
-                    margin: 0 0 0 10px;
                 }
             }
         }
@@ -1951,6 +2005,688 @@ footer {
                             color: var(--color-accent);
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    main {
+        .services {
+            .row {
+                padding: 0;
+            }
+        }
+
+        .choose-us {
+            .row {
+                gap: 30px;
+            }
+        }
+
+        .faq-area {
+            padding: 120px 0 120px;
+            background: var(--color-surface);
+
+            .row {
+                .faq-image {
+                    img {
+                        border-radius: 20px;
+                    }
+                }
+
+                .faq-content {
+                    background: var(--color-bg);
+                    overflow: hidden;
+                    border-radius: 20px;
+
+                    .faq-left {
+                        padding: 40px 0 40px 60px;
+
+                        .circle-image {
+                            background: var(--color-accent);
+                            height: 80px;
+                            width: 80px;
+                            border-radius: 50%;
+
+                            img {
+                                height: 45px;
+                                width: 45px;
+                            }
+                        }
+
+                        h5 {
+                            font-size: var(--font-size-medium);
+                            font-weight: var(--font-weight-bold);
+                            line-height: var(--font-size-base);
+                            color: var(--color-brand);
+                            margin: 15px 0;
+                        }
+
+                        p {
+                            line-height: var(--font-size-base);
+                            color: var(--color-text-muted);
+                            margin: 20px 0;
+                        }
+
+                        .btn-transparent {
+                            border: 1px solid #E3DBD8;
+                            transition: 0.3s all ease-in-out;
+
+                            &:hover {
+                                background: var(--color-accent);
+                                color: var(--color-bg);
+                                border: 1px solid #83CD20;
+                            }
+
+                            i {
+                                margin: 0 0 0 10px;
+                            }
+                        }
+                    }
+
+                    .faq-right {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 992px) {
+    .main {
+        .choose-us {
+            .choose-us-right {
+                h2 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+
+                p {
+                    line-height: var(--font-size-base);
+                    color: var(--color-text-muted);
+                }
+
+                .choose-us-boxes {
+                    gap: 30px;
+
+                    .card {
+                        padding: 30px;
+                        border-radius: 20px;
+
+                        &:hover {
+                            img {
+                                animation: shake 0.5s ease-in-out;
+                            }
+                        }
+
+                        .title {
+                            margin: 0 0 20px;
+
+                            .title-icon {
+                                height: 60px;
+                                width: 60px;
+                                background: var(--color-accent);
+                                border-radius: 50%;
+
+                                img {
+                                    height: 30px;
+                                    width: 30px;
+                                }
+                            }
+
+                            h4 {
+                                font-size: var(--font-size-medium);
+                                font-weight: var(--font-weight-bold);
+                                line-height: var(--font-size-base);
+                                margin: 0 0 0 20px;
+                                color: var(--color-brand);
+                            }
+                        }
+
+                        ul {
+                            font-size: var(--font-size-small);
+                            line-height: var(--font-size-base);
+                            color: var(--color-text-muted);
+
+                            li {
+                                i {
+                                    color: var(--color-accent);
+                                    margin: 0 5px 0 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .read-btn {
+                margin: 42px 0 0;
+
+                .btn-transparent {
+                    transition: 0.3s;
+
+                    i {
+                        padding: 0 0 0 10px;
+                    }
+
+                    &:hover {
+                        background: var(--color-brand);
+                        color: var(--color-bg);
+                        border: 1px solid #034833;
+                    }
+                }
+
+                .number {
+                    margin: 0 0 0 40px;
+
+                    .call-icon {
+                        height: 55px;
+                        width: 55px;
+                        background: var(--color-accent);
+                        border-radius: 50px;
+                        margin: 0 15px 0 0;
+
+                        i {
+                            color: var(--color-bg);
+                        }
+                    }
+
+                    .help {
+                        h6 {
+                            font-size: var(--font-size-small);
+                            line-height: var(--font-size-base);
+                            color: var(--color-brand);
+                        }
+
+                        a {
+                            font-size: 18px;
+                            font-weight: var(--font-weight-semibold);
+                            line-height: var(--font-size-lg);
+                            color: var(--color-brand);
+                            transition: 0.3s all ease-in-out;
+
+                            &:hover {
+                                color: var(--color-accent);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .swiper {
+                width: 90%;
+                max-width: 1200px;
+                padding: 120px 0;
+            }
+
+            .swiper-wrapper {
+                display: flex;
+                align-items: center;
+                /* vertically center slides */
+            }
+
+            .swiper-slide {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .swiper-slide img {
+                width: 120px;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+
+        .our-countries .inner {
+            .our-countries-head {
+                .title {
+                    h5 {
+
+                        img {
+                            height: 20px;
+                            width: 20px;
+                            margin: 0 10px 0 0;
+                        }
+                    }
+
+                    h2 {
+                        font-size: 40px;
+                        line-height: 50px;
+                    }
+                }
+            }
+        }
+
+        .visa-category {
+            .visa-heading {
+                h2 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+            }
+
+            .rows-wrapper {
+                .row {
+                    .card {}
+                }
+            }
+        }
+
+        .available-countries {
+
+            .available-countries-head {
+                h2 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+            }
+        }
+
+        .coach-support {
+            padding: 60px 0;
+
+            .coach-support-head {
+                .title {
+
+                    h2 {
+                        font-size: 40px;
+                        line-height: 50px;
+                    }
+                }
+            }
+        }
+
+        .coaching {
+            .coaching-head {
+                h2 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+            }
+        }
+
+        .process {
+            .process-heading {
+                h2 {
+                    font-size: 40px;
+                    line-height: 50px;
+                }
+            }
+        }
+    }
+
+    footer {
+        .footer-top {
+            .footer-left {
+                h3 {
+                    font-size: 22px;
+                }
+            }
+
+            .footer-right {
+                h3 {
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 786px) {
+    main {
+        .hero {
+            .inner {
+                padding: 0 10px;
+
+                .hero-left {
+                    h1 {
+                        font-size: 48px;
+                        line-height: 60px;
+                    }
+                }
+            }
+        }
+
+        .services {
+            .row {
+                padding: 0;
+                gap: 30px;
+            }
+        }
+    }
+
+    footer {
+        .footer-top {
+            gap: 30px;
+
+            &::before {
+                display: none;
+            }
+
+            .footer-left {
+                h3 {
+                    font-size: 17px;
+                }
+            }
+
+            .footer-right {
+                h3 {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    main {
+        .hero {
+            .inner {
+                /* padding: 0 10px; */
+
+                .hero-left {
+                    h1 {
+                        font-size: 27px;
+                        line-height: 37px;
+                    }
+                }
+            }
+        }
+
+        .choose-us {
+            .choose-us-right {
+                .read-btn {
+                    margin: 42px 0 0;
+                    gap: 30px;
+
+                    .btn-transparent {
+                        transition: 0.3s;
+
+                        i {
+                            padding: 0 0 0 10px;
+                        }
+
+                        &:hover {
+                            background: var(--color-brand);
+                            color: var(--color-bg);
+                            border: 1px solid #034833;
+                        }
+                    }
+
+                    .number {
+                        margin: 0;
+
+                        .call-icon {
+                            height: 55px;
+                            width: 55px;
+                            background: var(--color-accent);
+                            border-radius: 50px;
+                            margin: 0 15px 0 0;
+
+                            i {
+                                color: var(--color-bg);
+                            }
+                        }
+
+                        .help {
+                            h6 {
+                                font-size: var(--font-size-small);
+                                line-height: var(--font-size-base);
+                                color: var(--color-brand);
+                            }
+
+                            a {
+                                font-size: 18px;
+                                font-weight: var(--font-weight-semibold);
+                                line-height: var(--font-size-lg);
+                                color: var(--color-brand);
+                                transition: 0.3s all ease-in-out;
+
+                                &:hover {
+                                    color: var(--color-accent);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .faq-area {
+            .faq-content {
+                margin-top: 30px;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        .hero {
+            .inner {
+                overflow: hidden;
+
+                .hero-left {
+                    h1 {
+                        font-size: 40px;
+                        line-height: 52px;
+                    }
+                }
+
+                .hero-right {
+                    .circle {
+                        .man-right {
+                            height: 400px;
+
+                        }
+                    }
+
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        .choose-us {
+            .choose-us-right {
+                h2 {
+                    font-size: 28px;
+                    line-height: 38px;
+                }
+            }
+        }
+
+        .our-countries .inner {
+            .our-countries-head {
+                .title {
+                    h5 {
+
+                        img {
+                            height: 20px;
+                            width: 20px;
+                            margin: 0 10px 0 0;
+                        }
+                    }
+
+                    h2 {
+                        font-size: 27px;
+                        line-height: 38px;
+                    }
+                }
+            }
+        }
+
+        .visa-category {
+            .visa-heading {
+                h2 {
+                    font-size: 27px;
+                    line-height: 38px;
+                }
+            }
+
+            .rows-wrapper {
+                gap: 30px;
+
+                .row {
+                    .card-wrap {
+                        margin-bottom: 30px;
+
+                        .card {
+                            .card-body {
+                                flex-wrap: wrap;
+
+                                .card-img {
+                                    .image {
+                                        width: auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .available-countries {
+
+            .available-countries-head {
+                h2 {
+                    font-size: 28px;
+                    line-height: 38px;
+                    margin: 20px 0;
+                }
+            }
+
+            .row {
+                gap: 30px;
+                margin: 30px 0 0;
+            }
+        }
+
+        .coach-support {
+            padding: 60px 0;
+
+            .coach-support-head {
+                margin: 0 0 30px;
+
+                .title {
+
+                    h2 {
+                        font-size: 26px;
+                        line-height: 38px;
+                        margin: 0 0 30px;
+                    }
+                }
+            }
+
+            .coach-swiper {
+                .coach {
+                    position: relative;
+                    border-radius: 20px;
+                    padding: 0 0 70px;
+
+                    .image-box {
+                        position: relative;
+
+                        img {
+                            border-radius: 20px;
+                        }
+
+                        .coach-details {
+                            position: absolute;
+                            bottom: -72px;
+                            right: 0;
+                            gap: 50px;
+                            padding: 30px 10px 10px 30px;
+                            background: var(--color-bg);
+                            border-radius: 20px 0 20px 20px;
+
+                            .title {
+                                h5 {
+                                    font-size: var(--font-size-medium);
+                                    line-height: var(--font-size-base);
+                                    font-weight: var(--font-weight-bold);
+                                    color: var(--color-brand);
+                                }
+                            }
+
+                            .title-btn {
+                                button {
+                                    padding: 17px;
+                                    border: 1px solid #E3DBD8;
+                                    border-radius: 20px;
+                                    background: var(--color-bg);
+                                    transition: 0.3s;
+
+                                    &:hover {
+                                        background: var(--color-accent);
+
+                                        i {
+                                            color: var(--color-bg);
+                                            transform: rotate(45deg);
+                                        }
+
+                                    }
+
+                                    i {
+                                        color: var(--color-brand);
+                                        rotate: -45deg;
+                                        transition: 0.3s;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .coaching {
+            .coaching-head {
+                h2 {
+                    font-size: 28px;
+                    line-height: 38px;
+                }
+            }
+
+            .row {
+                gap: 30px;
+            }
+        }
+
+        .testimonial-area {
+            .row {
+                gap: 30px;
+            }
+        }
+
+        .process {
+            .process-heading {
+                h2 {
+                    font-size: 27px;
+                    line-height: 38px;
+                }
+            }
+
+            .process-row {
+                gap: 30px;
+
+                .item-2 {
+                    margin: 0;
+                }
+            }
+        }
+
+        .blogs {
+            .blogs-heading {
+                h2 {
+                    font-size: 28px;
+                    line-height: 38px;
+                    margin-bottom: 30px;
                 }
             }
         }
