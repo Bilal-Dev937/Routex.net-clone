@@ -41,11 +41,22 @@
 					<button class="btn-primary d-none d-sm-block">
 						Get An Appointment <i class="fa-solid fa-arrow-right"></i>
 					</button>
-					<div class="burger-menu d-block d-xl-none">
+					<div class="burger-menu d-block d-xl-none" id="burgerMenu">
 						<i class="fa-solid fa-bars"></i>
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="mobile-nav" id="mobileNav">
+			<div class="close-btn" id="closeNav"><i class="fa-solid fa-xmark"></i></div>
+			<ul>
+				<li><a href="">About Us</a></li>
+				<li><a href="">Services</a></li>
+				<li><a href="">Projects</a></li>
+				<li><a href="">Blog</a></li>
+				<li><a href="">Pages</a></li>
+				<li><a href="">Contact</a></li>
+			</ul>
 		</div>
 	</header>
 	<main>
@@ -1254,6 +1265,26 @@
 			//     c.classList.remove('active', 'not-active');
 			//   });
 			// });
+		});
+	</script>
+	<script>
+		const burger = document.getElementById('burgerMenu');
+		const mobileNav = document.getElementById('mobileNav');
+		const closeNav = document.getElementById('closeNav');
+
+		burger.addEventListener('click', () => {
+			mobileNav.classList.add('active');
+		});
+
+		closeNav.addEventListener('click', () => {
+			mobileNav.classList.remove('active');
+		});
+
+		// Optional: close menu when clicking outside (overlay style)
+		mobileNav.addEventListener('click', (e) => {
+			if (e.target === mobileNav) {
+				mobileNav.classList.remove('active');
+			}
 		});
 	</script>
 </body>
